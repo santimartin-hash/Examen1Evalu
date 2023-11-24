@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ManzanaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/MostrarManzanas', [ManzanaController::class, 'index']) ->name('MostrarManzanas');
+
+Route::post('/InsertarManzanas', [ManzanaController::class, 'store'])->name('InsertarManzanas');
+
+Route::put('/ModificarManzana', [ManzanaController::class,'update'])->name('ModificarManzana');
+
+Route::delete('/EliminarManzana/{manzana}', [ManzanaController::class,'destroy'])->middleware('GuardarManzanaEliminada')->name('EliminarManzana');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
